@@ -1,0 +1,65 @@
+{
+  "name": "@empresa-ia/core",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./auth": {
+      "types": "./dist/auth/index.d.ts",
+      "default": "./dist/auth/index.js"
+    },
+    "./billing": {
+      "types": "./dist/billing/index.d.ts",
+      "default": "./dist/billing/index.js"
+    },
+    "./agents": {
+      "types": "./dist/agents/index.d.ts",
+      "default": "./dist/agents/index.js"
+    },
+    "./rag": {
+      "types": "./dist/rag/index.d.ts",
+      "default": "./dist/rag/index.js"
+    },
+    "./tickets": {
+      "types": "./dist/tickets/index.d.ts",
+      "default": "./dist/tickets/index.js"
+    },
+    "./notifications": {
+      "types": "./dist/notifications/index.d.ts",
+      "default": "./dist/notifications/index.js"
+    },
+    "./whatsapp": {
+      "types": "./dist/whatsapp/index.d.ts",
+      "default": "./dist/whatsapp/index.js"
+    },
+    "./vertical": {
+      "types": "./dist/vertical.d.ts",
+      "default": "./dist/vertical.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@empresa-ia/db": "workspace:*",
+    "@anthropic-ai/sdk": "^0.36.3",
+    "openai": "^4.77.3",
+    "@langchain/langgraph": "^0.2.36",
+    "@langchain/anthropic": "^0.3.14",
+    "@upstash/redis": "^1.34.3",
+    "resend": "^4.0.1",
+    "zod": "^3.24.1",
+    "drizzle-orm": "^0.38.3"
+  },
+  "devDependencies": {
+    "@empresa-ia/config": "workspace:*",
+    "typescript": "^5.7.2",
+    "@types/node": "^22.10.2"
+  }
+}

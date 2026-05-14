@@ -1,0 +1,5 @@
+export { db } from './client.js'
+export { withTenant } from './tenant.js'
+export type { Database } from './client.js'
+export type { TenantContext } from './tenant.js'
+export * from './schema/index.js'
