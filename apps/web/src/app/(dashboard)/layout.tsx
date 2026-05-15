@@ -13,8 +13,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
         </div>
         <nav className="flex-1 p-4 space-y-1">
           <NavItem href="/dashboard" label="Inicio" />
-          <NavItem href="/dashboard/tickets" label="Tickets" />
+          <NavItem href="/dashboard/chat" label="Asistente IA" />
           <NavItem href="/dashboard/conversations" label="Conversaciones" />
+          <NavItem href="/dashboard/tickets" label="Tickets" />
           <NavItem href="/dashboard/billing" label="Facturación" />
           <NavItem href="/dashboard/settings" label="Configuración" />
         </nav>
