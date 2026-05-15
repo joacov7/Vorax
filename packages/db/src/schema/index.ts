@@ -13,3 +13,4 @@ export * from './core/audit'
 
 // ── Vertical schemas ──────────────────────────────────────────────
 export * from './verticals/contadores'
+export * from './verticals/gimnasios'
