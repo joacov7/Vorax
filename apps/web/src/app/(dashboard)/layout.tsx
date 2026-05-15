@@ -17,6 +17,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
           <p className="px-3 pt-4 pb-1 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">Gimnasio</p>
           <NavItem href="/dashboard/socios" label="Socios" />
           <NavItem href="/dashboard/clases" label="Clases" />
+          <p className="px-3 pt-4 pb-1 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">Logística</p>
+          <NavItem href="/dashboard/envios" label="Envíos" />
+          <NavItem href="/dashboard/flota" label="Flota y Choferes" />
           <p className="px-3 pt-4 pb-1 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">Sistema</p>
           <NavItem href="/dashboard/billing" label="Facturación" />
           <NavItem href="/dashboard/settings" label="Configuración" />
