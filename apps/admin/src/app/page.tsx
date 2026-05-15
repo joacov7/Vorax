@@ -3,7 +3,7 @@ import { eq, count, sql, gte } from 'drizzle-orm'
 import Link from 'next/link'
 
 async function getMetrics() {
-  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
 
   const [
     totalTenants,

@@ -6,7 +6,7 @@ import { MetricCard } from '@empresa-ia/ui'
 const DEMO_TENANT = process.env.DEMO_TENANT_ID ?? ''
 
 async function getDashboardMetrics(tenantId: string) {
-  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()
+  const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
 
   const [openTickets, totalConversations, resolvedConversations] = await Promise.all([
     db.select({ count: count() }).from(tickets)
