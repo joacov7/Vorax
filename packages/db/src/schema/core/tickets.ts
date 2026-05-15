@@ -1,8 +1,8 @@
 import { pgTable, uuid, text, jsonb, integer, timestamp, vector } from 'drizzle-orm/pg-core'
-import { tenants } from './tenants.js'
-import { contacts } from './contacts.js'
-import { conversations } from './conversations.js'
-import { users } from './users.js'
+import { tenants } from './tenants'
+import { contacts } from './contacts'
+import { conversations } from './conversations'
+import { users } from './users'
 
 export const tickets = pgTable('tickets', {
   id: uuid('id').primaryKey().defaultRandom(),

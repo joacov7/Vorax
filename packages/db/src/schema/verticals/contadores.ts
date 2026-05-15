@@ -1,5 +1,5 @@
 import { pgTable, uuid, text, numeric, boolean, date, jsonb, timestamp } from 'drizzle-orm/pg-core'
-import { tenants } from '../core/tenants.js'
+import { tenants } from '../core/tenants'
 
 // Clientes del estudio contable
 export const cnt_clients = pgTable('cnt_clients', {

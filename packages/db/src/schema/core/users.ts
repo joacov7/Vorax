@@ -1,5 +1,5 @@
 import { pgTable, uuid, text, jsonb, timestamp } from 'drizzle-orm/pg-core'
-import { tenants } from './tenants.js'
+import { tenants } from './tenants'
 
 export const users = pgTable('users', {
   id: uuid('id').primaryKey(),                         // = Clerk user id

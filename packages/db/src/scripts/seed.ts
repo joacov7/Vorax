@@ -6,7 +6,7 @@ import { neon } from '@neondatabase/serverless'
 import { drizzle } from 'drizzle-orm/neon-http'
 import * as dotenv from 'dotenv'
 import { resolve } from 'path'
-import * as schema from '../schema/index.js'
+import * as schema from '../schema/index'
 
 dotenv.config({ path: resolve(process.cwd(), '../../.env.local') })
 

@@ -1,6 +1,6 @@
 import { pgTable, uuid, text, jsonb, integer, timestamp, vector } from 'drizzle-orm/pg-core'
-import { tenants } from './tenants.js'
-import { contacts } from './contacts.js'
+import { tenants } from './tenants'
+import { contacts } from './contacts'
 
 export const agent_memory = pgTable('agent_memory', {
   id: uuid('id').primaryKey().defaultRandom(),

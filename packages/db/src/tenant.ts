@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm'
-import { db } from './client.js'
+import { db } from './client'
 
 /**
  * Wrapper obligatorio para todo acceso a datos.
