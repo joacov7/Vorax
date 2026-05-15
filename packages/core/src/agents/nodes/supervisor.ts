@@ -1,4 +1,4 @@
-import type { AgentState } from '../state.js'
+import type { AgentState } from '../state'
 
 const FRUSTRATION_KEYWORDS = [
   'no me ayuda', 'no entiende', 'quiero hablar con una persona',

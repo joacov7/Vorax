@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
-import { PLANS, MODULE_PRICES } from '../../billing/plans.js'
-import type { AgentState, AgentAction } from '../state.js'
+import { PLANS, MODULE_PRICES } from '../../billing/plans'
+import type { AgentState, AgentAction } from '../state'
 
 const claude = new Anthropic()
 

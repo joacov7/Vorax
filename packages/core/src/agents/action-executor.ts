@@ -1,5 +1,5 @@
-import { createTicket } from '../tickets/index.js'
-import type { AgentState, AgentAction } from './state.js'
+import { createTicket } from '../tickets/index'
+import type { AgentState, AgentAction } from './state'
 
 export async function actionExecutorNode(state: AgentState): Promise<Partial<AgentState>> {
   if (!state.actions || state.actions.length === 0) return {}

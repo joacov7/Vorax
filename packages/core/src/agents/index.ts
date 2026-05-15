@@ -1,3 +1,3 @@
-export { runAgentTurn, agentGraph } from './graph.js'
-export { AgentStateAnnotation } from './state.js'
-export type { AgentState, AgentType, IntentType, AgentAction, AgentMessage } from './state.js'
+export { runAgentTurn, agentGraph } from './graph'
+export { AgentStateAnnotation } from './state'
+export type { AgentState, AgentType, IntentType, AgentAction, AgentMessage } from './state'

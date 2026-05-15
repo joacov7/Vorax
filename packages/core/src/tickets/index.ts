@@ -1,6 +1,6 @@
 import { db, tickets, type NewTicket } from '@empresa-ia/db'
 import { eq, and, desc, sql } from 'drizzle-orm'
-import { embed } from '../rag/embed.js'
+import { embed } from '../rag/embed'
 
 export async function createTicket(data: NewTicket) {
   const embedding = await embed(`${data.title} ${data.description}`)

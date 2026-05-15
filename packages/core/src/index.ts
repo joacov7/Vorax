@@ -1,26 +1,26 @@
 // Auth
-export * from './auth/index.js'
+export * from './auth/index'
 
 // Billing
-export * from './billing/index.js'
+export * from './billing/index'
 
 // Tickets
-export * from './tickets/index.js'
+export * from './tickets/index'
 
 // Notifications
-export * from './notifications/index.js'
+export * from './notifications/index'
 
 // WhatsApp
-export * from './whatsapp/index.js'
+export * from './whatsapp/index'
 
 // RAG
-export * from './rag/index.js'
+export * from './rag/index'
 
 // Agents
-export * from './agents/index.js'
+export * from './agents/index'
 
 // Audit
-export * from './audit/index.js'
+export * from './audit/index'
 
 // Vertical factory
-export * from './vertical.js'
+export * from './vertical'

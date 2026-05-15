@@ -1,5 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
-import type { AgentState, IntentType } from '../state.js'
+import type { AgentState, IntentType } from '../state'
 
 const claude = new Anthropic()
 

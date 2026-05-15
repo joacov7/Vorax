@@ -1,8 +1,8 @@
 import { db, subscriptions, invoices, tenants } from '@empresa-ia/db'
 import { eq } from 'drizzle-orm'
-import { PLANS } from './plans.js'
+import { PLANS } from './plans'
 
-export { PLANS, MODULE_PRICES } from './plans.js'
+export { PLANS, MODULE_PRICES } from './plans'
 
 export async function getActiveSubscription(tenantId: string) {
   const result = await db

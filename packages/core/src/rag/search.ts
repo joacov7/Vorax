@@ -1,6 +1,6 @@
 import { db } from '@empresa-ia/db'
 import { sql } from 'drizzle-orm'
-import { embed } from './embed.js'
+import { embed } from './embed'
 
 export interface SearchResult {
   content: string

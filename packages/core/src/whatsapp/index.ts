@@ -1,4 +1,4 @@
-export { sendTextMessage, sendTemplateMessage } from './client.js'
+export { sendTextMessage, sendTemplateMessage } from './client'
 
 import { Redis } from '@upstash/redis'
 import type { NewMessage } from '@empresa-ia/db'

@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
-import { findSimilarTickets, createTicket, incrementTicketVotes } from '../../tickets/index.js'
-import { embed } from '../../rag/embed.js'
-import type { AgentState, AgentAction } from '../state.js'
+import { findSimilarTickets, createTicket, incrementTicketVotes } from '../../tickets/index'
+import { embed } from '../../rag/embed'
+import type { AgentState, AgentAction } from '../state'
 
 const claude = new Anthropic()
 

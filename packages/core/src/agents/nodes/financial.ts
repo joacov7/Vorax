@@ -1,8 +1,8 @@
 import Anthropic from '@anthropic-ai/sdk'
-import { getActiveSubscription } from '../../billing/index.js'
+import { getActiveSubscription } from '../../billing/index'
 import { db, invoices } from '@empresa-ia/db'
 import { eq, desc } from 'drizzle-orm'
-import type { AgentState, AgentAction } from '../state.js'
+import type { AgentState, AgentAction } from '../state'
 
 const claude = new Anthropic()
 

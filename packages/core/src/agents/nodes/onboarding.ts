@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
-import { searchDocuments } from '../../rag/index.js'
-import type { AgentState } from '../state.js'
+import { searchDocuments } from '../../rag/index'
+import type { AgentState } from '../state'
 
 const claude = new Anthropic()
 

@@ -1,7 +1,7 @@
 import { db, conversations } from '@empresa-ia/db'
 import { eq } from 'drizzle-orm'
-import { sendTextMessage } from '../../whatsapp/client.js'
-import type { AgentState } from '../state.js'
+import { sendTextMessage } from '../../whatsapp/client'
+import type { AgentState } from '../state'
 
 export async function humanHandoffNode(state: AgentState): Promise<Partial<AgentState>> {
   // Marcar la conversación como esperando humano

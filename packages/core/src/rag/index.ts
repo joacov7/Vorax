@@ -1,12 +1,12 @@
-export { embed, embedBatch } from './embed.js'
-export { searchDocuments } from './search.js'
-export { chunkText } from './chunk.js'
-export type { SearchResult } from './search.js'
-export type { Chunk } from './chunk.js'
+export { embed, embedBatch } from './embed'
+export { searchDocuments } from './search'
+export { chunkText } from './chunk'
+export type { SearchResult } from './search'
+export type { Chunk } from './chunk'
 
 import { db, documents, document_chunks } from '@empresa-ia/db'
-import { chunkText } from './chunk.js'
-import { embedBatch } from './embed.js'
+import { chunkText } from './chunk'
+import { embedBatch } from './embed'
 
 export async function ingestDocument(data: {
   tenantId?: string
