@@ -10,6 +10,7 @@ export * from './core/agent-memory'
 export * from './core/quotes'
 export * from './core/workflows'
 export * from './core/audit'
+export * from './core/user-documents'
 
 // ── Vertical schemas ──────────────────────────────────────────────
 export * from './verticals/contadores'

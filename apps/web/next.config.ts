@@ -8,6 +8,11 @@ dotenvConfig({ path: resolve(__dirname, '../../.env') })
 
 const nextConfig: NextConfig = {
   transpilePackages: ['@empresa-ia/core', '@empresa-ia/db', '@empresa-ia/ui'],
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '12mb', // uploads de documentos OCR
+    },
+  },
 }
 
 export default nextConfig

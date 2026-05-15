@@ -11,7 +11,8 @@
     "./tickets": "./src/tickets/index.ts",
     "./notifications": "./src/notifications/index.ts",
     "./whatsapp": "./src/whatsapp/index.ts",
-    "./vertical": "./src/vertical.ts"
+    "./vertical": "./src/vertical.ts",
+    "./ocr": "./src/ocr/index.ts"
   },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -20,19 +21,21 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@empresa-ia/db": "workspace:*",
     "@anthropic-ai/sdk": "^0.36.3",
-    "openai": "^4.77.3",
-    "@langchain/langgraph": "^0.2.36",
+    "@empresa-ia/db": "workspace:*",
     "@langchain/anthropic": "^0.3.14",
+    "@langchain/langgraph": "^0.2.36",
+    "@types/pdf-parse": "^1.1.5",
     "@upstash/redis": "^1.34.3",
+    "drizzle-orm": "^0.38.3",
+    "openai": "^4.77.3",
+    "pdf-parse": "^2.4.5",
     "resend": "^4.0.1",
-    "zod": "^3.24.1",
-    "drizzle-orm": "^0.38.3"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@empresa-ia/config": "workspace:*",
-    "typescript": "^5.7.2",
-    "@types/node": "^22.10.2"
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
   }
 }

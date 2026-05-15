@@ -20,6 +20,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
           <NavItem href="/dashboard/clientes-cnt" label="Clientes" />
           <NavItem href="/dashboard/vencimientos" label="Vencimientos" />
           <NavItem href="/dashboard/iva" label="Libro IVA" />
+          <NavItem href="/dashboard/documentos" label="Documentos OCR" />
 
           <SectionLabel label="Consultorio" />
           <NavItem href="/dashboard/pacientes" label="Pacientes" />
