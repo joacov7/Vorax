@@ -6,6 +6,7 @@
     ".": "./src/index.ts",
     "./auth": "./src/auth/index.ts",
     "./billing": "./src/billing/index.ts",
+    "./billing/plans": "./src/billing/plans.ts",
     "./agents": "./src/agents/index.ts",
     "./rag": "./src/rag/index.ts",
     "./tickets": "./src/tickets/index.ts",

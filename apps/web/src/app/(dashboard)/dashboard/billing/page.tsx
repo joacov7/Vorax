@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { PLANS } from '@empresa-ia/core/billing'
+import { PLANS } from '@empresa-ia/core/billing/plans'
 
 const DEMO_TENANT_ID = process.env.NEXT_PUBLIC_DEMO_TENANT_ID ?? ''
 
