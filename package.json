@@ -8,9 +8,12 @@
     "dev:workers": "turbo dev --filter=@empresa-ia/workers",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
+    "db:push": "cd packages/db && pnpm drizzle-kit push",
     "db:generate": "turbo db:generate",
     "db:migrate": "turbo db:migrate",
     "db:studio": "cd packages/db && pnpm drizzle-kit studio",
+    "db:seed": "cd packages/db && pnpm tsx src/scripts/seed.ts",
+    "db:setup": "cd packages/db && pnpm tsx src/scripts/setup.ts",
     "clean": "turbo clean && find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
   },
   "devDependencies": {
