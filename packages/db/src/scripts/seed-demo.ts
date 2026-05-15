@@ -345,6 +345,85 @@ async function seedDemo() {
   ])
   console.log(`   ✓ 3 clientes, 5 vencimientos`)
 
+  // Registros IVA del mes actual
+  const currentPeriod = new Date().toISOString().slice(0, 7) // 'YYYY-MM'
+
+  await db.insert(schema.cnt_vat_records).values([
+    // Ventas
+    {
+      tenant_id: tenantContadores!.id,
+      client_id: clientCnt1!.id,
+      type: 'sale',
+      invoice_number: 'A-0001-00012345',
+      invoice_date: daysAgo(5),
+      cuit_counterpart: '33-70123456-9',
+      name_counterpart: 'Distribuidora Pampeana S.A.',
+      net_amount: '250000',
+      vat_amount: '52500',
+      total_amount: '302500',
+      vat_rate: '21',
+      period: currentPeriod,
+    },
+    {
+      tenant_id: tenantContadores!.id,
+      client_id: clientCnt1!.id,
+      type: 'sale',
+      invoice_number: 'A-0001-00012346',
+      invoice_date: daysAgo(3),
+      cuit_counterpart: '20-25678901-2',
+      name_counterpart: 'Juan Carlos Pérez',
+      net_amount: '80000',
+      vat_amount: '16800',
+      total_amount: '96800',
+      vat_rate: '21',
+      period: currentPeriod,
+    },
+    {
+      tenant_id: tenantContadores!.id,
+      client_id: clientCnt3!.id,
+      type: 'sale',
+      invoice_number: 'A-0001-00005678',
+      invoice_date: daysAgo(8),
+      cuit_counterpart: '30-56789012-1',
+      name_counterpart: 'Metalúrgica del Norte S.R.L.',
+      net_amount: '520000',
+      vat_amount: '109200',
+      total_amount: '629200',
+      vat_rate: '21',
+      period: currentPeriod,
+    },
+    // Compras
+    {
+      tenant_id: tenantContadores!.id,
+      client_id: clientCnt1!.id,
+      type: 'purchase',
+      invoice_number: 'A-0005-00067890',
+      invoice_date: daysAgo(10),
+      cuit_counterpart: '30-61234567-0',
+      name_counterpart: 'Proveedor Textil S.A.',
+      net_amount: '120000',
+      vat_amount: '25200',
+      total_amount: '145200',
+      vat_rate: '21',
+      period: currentPeriod,
+    },
+    {
+      tenant_id: tenantContadores!.id,
+      client_id: clientCnt3!.id,
+      type: 'purchase',
+      invoice_number: 'B-0001-00011111',
+      invoice_date: daysAgo(6),
+      cuit_counterpart: '27-34567890-1',
+      name_counterpart: 'Alquileres SA',
+      net_amount: '85000',
+      vat_amount: '8925',
+      total_amount: '93925',
+      vat_rate: '10.5',
+      period: currentPeriod,
+    },
+  ])
+  console.log(`   ✓ 5 registros IVA del período ${currentPeriod}`)
+
   // ── 8. VERTICAL GIMNASIOS ─────────────────────────────────────────────────────
 
   console.log('\n🏋️ Cargando datos de Gimnasios...')

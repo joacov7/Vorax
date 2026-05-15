@@ -5,24 +5,29 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div className="flex h-screen bg-background">
-      <aside className="w-64 border-r bg-card flex flex-col overflow-y-auto">
+      <aside className="w-64 border-r bg-card flex flex-col overflow-y-auto flex-shrink-0">
         <div className="p-6 border-b flex-shrink-0">
           <h1 className="font-bold text-lg">Vorax IA</h1>
           <p className="text-xs text-muted-foreground mt-0.5">Panel del cliente</p>
         </div>
-        <nav className="flex-1 p-4 space-y-0.5">
+        <nav className="flex-1 p-3 space-y-0.5">
           <NavItem href="/dashboard" label="Inicio" />
           <NavItem href="/dashboard/chat" label="Asistente IA" />
           <NavItem href="/dashboard/conversations" label="Conversaciones" />
           <NavItem href="/dashboard/tickets" label="Tickets" />
 
-          <SectionLabel label="Gimnasio" />
-          <NavItem href="/dashboard/socios" label="Socios" />
-          <NavItem href="/dashboard/clases" label="Clases" />
+          <SectionLabel label="Contadores" />
+          <NavItem href="/dashboard/clientes-cnt" label="Clientes" />
+          <NavItem href="/dashboard/vencimientos" label="Vencimientos" />
+          <NavItem href="/dashboard/iva" label="Libro IVA" />
 
           <SectionLabel label="Consultorio" />
           <NavItem href="/dashboard/pacientes" label="Pacientes" />
           <NavItem href="/dashboard/turnos" label="Agenda de Turnos" />
+
+          <SectionLabel label="Gimnasio" />
+          <NavItem href="/dashboard/socios" label="Socios" />
+          <NavItem href="/dashboard/clases" label="Clases" />
 
           <SectionLabel label="Logística" />
           <NavItem href="/dashboard/envios" label="Envíos" />
@@ -30,6 +35,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
           <SectionLabel label="Sistema" />
           <NavItem href="/dashboard/billing" label="Facturación" />
+          <NavItem href="/dashboard/settings" label="Configuración" />
         </nav>
       </aside>
       <main className="flex-1 overflow-auto">
