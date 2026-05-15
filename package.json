@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "dev": "turbo dev --filter=@empresa-ia/web --filter=@empresa-ia/admin",
+    "dev:workers": "turbo dev --filter=@empresa-ia/workers",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "db:generate": "turbo db:generate",
