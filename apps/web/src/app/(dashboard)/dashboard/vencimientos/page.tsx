@@ -1,29 +1,18 @@
 import { db, cnt_deadlines, cnt_clients } from '@empresa-ia/db'
-import { eq, and, gte, lte, lt, count, desc } from 'drizzle-orm'
+import { eq, and, gte, lte, desc } from 'drizzle-orm'
+import { RemindButton, CompleteButton } from './actions'
 
 const DEMO_TENANT_ID = process.env.DEMO_TENANT_ID ?? ''
 
 const TYPE_LABEL: Record<string, string> = {
-  iva:             'IVA',
-  ganancias:       'Ganancias',
-  ingresos_brutos: 'Ing. Brutos',
-  monotributo:     'Monotributo',
-  agip:            'AGIP',
-  arba:            'ARBA',
-  suss:            'SUSS',
+  iva:               'IVA',
+  ganancias:         'Ganancias',
+  ingresos_brutos:   'Ing. Brutos',
+  monotributo:       'Monotributo',
+  agip:              'AGIP',
+  arba:              'ARBA',
+  suss:              'SUSS',
   bienes_personales: 'Bs. Personales',
-}
-
-const STATUS_STYLE: Record<string, string> = {
-  pending:   'bg-blue-50 text-blue-700',
-  completed: 'bg-green-50 text-green-700',
-  overdue:   'bg-red-50 text-red-700',
-}
-
-const STATUS_LABEL: Record<string, string> = {
-  pending:   'Pendiente',
-  completed: 'Presentado',
-  overdue:   'Vencido',
 }
 
 async function getDeadlines(tenantId: string) {
@@ -97,6 +86,12 @@ function urgencyStyle(days: number): string {
   return 'text-muted-foreground'
 }
 
+function urgencyBadge(days: number): string {
+  if (days <= 2) return 'bg-red-100 text-red-700'
+  if (days <= 7) return 'bg-orange-100 text-orange-700'
+  return 'bg-blue-50 text-blue-700'
+}
+
 export default async function VencimientosPage() {
   const tenantId = DEMO_TENANT_ID
 
@@ -114,8 +109,6 @@ export default async function VencimientosPage() {
     getClientNames(tenantId),
   ])
 
-  const today = new Date().toISOString().split('T')[0]!
-
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -123,7 +116,7 @@ export default async function VencimientosPage() {
           <h2 className="text-2xl font-bold">Vencimientos impositivos</h2>
           <p className="text-muted-foreground text-sm mt-1">Próximos 30 días</p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex items-center gap-3">
           {overdue.length > 0 && (
             <span className="flex items-center gap-1.5 text-sm font-medium text-red-600 bg-red-50 border border-red-100 px-3 py-1.5 rounded-lg">
               <span className="w-2 h-2 rounded-full bg-red-500" />
@@ -134,27 +127,38 @@ export default async function VencimientosPage() {
             <span className="w-2 h-2 rounded-full bg-blue-500" />
             {upcoming.length} próximos
           </span>
+          <RemindButton count={upcoming.length} />
         </div>
       </div>
 
       {/* Vencidos */}
       {overdue.length > 0 && (
         <section className="mb-8">
-          <h3 className="text-sm font-semibold text-red-600 mb-3 flex items-center gap-2">
-            ⚠ Vencidos sin presentar
-          </h3>
-          <div className="rounded-lg border border-red-100 bg-red-50/30 overflow-hidden">
-            <div className="divide-y divide-red-100">
-              {overdue.map((d) => (
-                <DeadlineRow
-                  key={d.id}
-                  deadline={d}
-                  clientName={clientNames.get(d.client_id) ?? '—'}
-                  daysLabel={`Venció hace ${Math.abs(daysUntil(d.due_date))}d`}
-                  daysClass="text-red-600 font-bold"
-                />
-              ))}
-            </div>
+          <h3 className="text-sm font-semibold text-red-600 mb-3">⚠ Vencidos sin presentar</h3>
+          <div className="rounded-lg border border-red-100 bg-red-50/30 overflow-hidden divide-y divide-red-100">
+            {overdue.map((d) => {
+              const days = daysUntil(d.due_date)
+              return (
+                <div key={d.id} className="flex items-center gap-4 px-5 py-3">
+                  <span className="text-xs font-bold px-2 py-0.5 rounded bg-red-100 text-red-700 flex-shrink-0">
+                    {TYPE_LABEL[d.type] ?? d.type}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm">{clientNames.get(d.client_id) ?? '—'}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {d.description}{d.period ? ` · ${d.period}` : ''}
+                    </p>
+                  </div>
+                  <CompleteButton deadlineId={d.id} />
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-sm text-red-600 font-bold">Venció hace {Math.abs(days)}d</p>
+                    <p className="text-xs text-muted-foreground">
+                      {new Date(d.due_date + 'T00:00:00').toLocaleDateString('es-AR')}
+                    </p>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </section>
       )}
@@ -175,7 +179,7 @@ export default async function VencimientosPage() {
                   <th className="text-left px-5 py-3 font-semibold text-muted-foreground">Cliente</th>
                   <th className="text-left px-5 py-3 font-semibold text-muted-foreground hidden md:table-cell">Período</th>
                   <th className="text-left px-5 py-3 font-semibold text-muted-foreground hidden lg:table-cell">Importe est.</th>
-                  <th className="text-right px-5 py-3 font-semibold text-muted-foreground">En</th>
+                  <th className="text-right px-5 py-3 font-semibold text-muted-foreground">Acción</th>
                 </tr>
               </thead>
               <tbody className="divide-y">
@@ -185,7 +189,7 @@ export default async function VencimientosPage() {
                     <tr key={d.id} className="hover:bg-muted/20 transition-colors">
                       <td className="px-5 py-3">
                         <div className="flex items-center gap-2">
-                          <span className={`text-xs font-bold px-2 py-0.5 rounded ${days <= 2 ? 'bg-red-100 text-red-700' : days <= 7 ? 'bg-orange-100 text-orange-700' : 'bg-blue-50 text-blue-700'}`}>
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded ${urgencyBadge(days)}`}>
                             {TYPE_LABEL[d.type] ?? d.type}
                           </span>
                           <span className="text-muted-foreground text-xs">{d.description}</span>
@@ -200,8 +204,13 @@ export default async function VencimientosPage() {
                       <td className="px-5 py-3 hidden lg:table-cell">
                         {d.amount ? `$${Number(d.amount).toLocaleString('es-AR')}` : '—'}
                       </td>
-                      <td className={`px-5 py-3 text-right text-sm ${urgencyStyle(days)}`}>
-                        {days === 0 ? '¡Hoy!' : days === 1 ? 'Mañana' : `${days}d`}
+                      <td className="px-5 py-3 text-right">
+                        <div className="flex items-center justify-end gap-3">
+                          <span className={`text-sm ${urgencyStyle(days)}`}>
+                            {days === 0 ? '¡Hoy!' : days === 1 ? 'Mañana' : `${days}d`}
+                          </span>
+                          <CompleteButton deadlineId={d.id} />
+                        </div>
                       </td>
                     </tr>
                   )
@@ -211,36 +220,6 @@ export default async function VencimientosPage() {
           </div>
         </section>
       )}
-    </div>
-  )
-}
-
-function DeadlineRow({
-  deadline,
-  clientName,
-  daysLabel,
-  daysClass,
-}: {
-  deadline: { type: string; description: string; due_date: string; amount: string | null; period: string | null }
-  clientName: string
-  daysLabel: string
-  daysClass: string
-}) {
-  return (
-    <div className="flex items-center gap-4 px-5 py-3">
-      <span className="text-xs font-bold px-2 py-0.5 rounded bg-red-100 text-red-700 flex-shrink-0">
-        {TYPE_LABEL[deadline.type] ?? deadline.type}
-      </span>
-      <div className="flex-1 min-w-0">
-        <p className="font-medium text-sm">{clientName}</p>
-        <p className="text-xs text-muted-foreground">{deadline.description}{deadline.period ? ` · ${deadline.period}` : ''}</p>
-      </div>
-      <div className="text-right flex-shrink-0">
-        <p className={`text-sm ${daysClass}`}>{daysLabel}</p>
-        <p className="text-xs text-muted-foreground">
-          {new Date(deadline.due_date + 'T00:00:00').toLocaleDateString('es-AR')}
-        </p>
-      </div>
     </div>
   )
 }

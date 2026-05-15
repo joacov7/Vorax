@@ -13,7 +13,8 @@
     "./notifications": "./src/notifications/index.ts",
     "./whatsapp": "./src/whatsapp/index.ts",
     "./vertical": "./src/vertical.ts",
-    "./ocr": "./src/ocr/index.ts"
+    "./ocr": "./src/ocr/index.ts",
+    "./deadlines": "./src/deadlines/index.ts"
   },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
