@@ -614,12 +614,164 @@ async function seedDemo() {
 
   console.log(`   ✓ 2 clientes, 3 vehículos, 2 choferes, 3 envíos, 5 eventos de tracking`)
 
+  // ── 11. VERTICAL: CONSULTORIOS ───────────────────────────────────────────────
+
+  console.log('\n🏥 Creando datos de consultorio...')
+
+  const [tenantConsultorio] = await db.insert(schema.tenants).values({
+    slug: 'consultorio-mendez',
+    name: 'Consultorio Médico Dr. Méndez',
+    vertical: 'consultorios',
+    plan: 'pro',
+    status: 'active',
+    active_modules: ['auth', 'tickets', 'crm', 'whatsapp', 'notifications', 'rag', 'workflows'],
+    trial_ends_at: null,
+  }).returning()
+
+  await db.insert(schema.subscriptions).values({
+    tenant_id: tenantConsultorio!.id,
+    plan: 'pro',
+    status: 'active',
+    modules_active: ['auth', 'tickets', 'crm', 'whatsapp', 'notifications', 'rag', 'workflows'],
+    amount_monthly: '300',
+    billing_day: 10,
+    next_billing_at: new Date(Date.now() + 15 * 86400000),
+  })
+
+  const [patient1] = await db.insert(schema.con_patients).values({
+    tenant_id: tenantConsultorio!.id,
+    name: 'María González',
+    dni: '27345678',
+    email: 'maria.gonzalez@gmail.com',
+    phone: '+5491133334444',
+    date_of_birth: '1985-03-15',
+    gender: 'femenino',
+    obra_social: 'OSDE 210',
+    affiliate_number: '12345678',
+    blood_type: 'A+',
+    active: true,
+  }).returning()
+
+  const [patient2] = await db.insert(schema.con_patients).values({
+    tenant_id: tenantConsultorio!.id,
+    name: 'Carlos Rodríguez',
+    dni: '31234567',
+    phone: '+5491177778888',
+    date_of_birth: '1978-07-22',
+    gender: 'masculino',
+    obra_social: 'Swiss Medical',
+    allergies: 'Penicilina',
+    active: true,
+  }).returning()
+
+  const [patient3] = await db.insert(schema.con_patients).values({
+    tenant_id: tenantConsultorio!.id,
+    name: 'Ana Fernández',
+    dni: '38901234',
+    email: 'ana.fernandez@hotmail.com',
+    phone: '+5491155556666',
+    date_of_birth: '1995-11-08',
+    gender: 'femenino',
+    active: true,
+  }).returning()
+
+  const todayStr = new Date().toISOString().split('T')[0]!
+  const tomorrowStr = daysFromNow(1)
+  const in2DaysStr = daysFromNow(2)
+  const in3DaysStr = daysFromNow(3)
+
+  await db.insert(schema.con_appointments).values([
+    {
+      tenant_id: tenantConsultorio!.id,
+      patient_id: patient1!.id,
+      professional: 'Dr. Méndez',
+      specialty: 'Clínica General',
+      date: todayStr,
+      time: '09:00',
+      status: 'confirmed',
+      reason: 'Control de rutina',
+      reminder_sent: true,
+    },
+    {
+      tenant_id: tenantConsultorio!.id,
+      patient_id: patient2!.id,
+      professional: 'Dr. Méndez',
+      specialty: 'Clínica General',
+      date: tomorrowStr,
+      time: '10:30',
+      status: 'scheduled',
+      reason: 'Revisión post-operatoria',
+      reminder_sent: false,
+    },
+    {
+      tenant_id: tenantConsultorio!.id,
+      patient_id: patient3!.id,
+      professional: 'Dra. López',
+      specialty: 'Dermatología',
+      date: tomorrowStr,
+      time: '14:00',
+      status: 'scheduled',
+      reason: 'Consulta de piel',
+      reminder_sent: false,
+    },
+    {
+      tenant_id: tenantConsultorio!.id,
+      patient_id: patient1!.id,
+      professional: 'Dr. Méndez',
+      specialty: 'Clínica General',
+      date: in2DaysStr,
+      time: '11:00',
+      status: 'scheduled',
+      reason: 'Resultado de análisis',
+      reminder_sent: false,
+    },
+    {
+      tenant_id: tenantConsultorio!.id,
+      patient_id: patient2!.id,
+      professional: 'Dra. López',
+      specialty: 'Dermatología',
+      date: in3DaysStr,
+      time: '16:30',
+      status: 'scheduled',
+      reminder_sent: false,
+    },
+  ])
+
+  await db.insert(schema.con_medical_records).values({
+    tenant_id: tenantConsultorio!.id,
+    patient_id: patient1!.id,
+    professional: 'Dr. Méndez',
+    date: daysAgo(30),
+    chief_complaint: 'Dolor abdominal leve',
+    diagnosis: 'Gastritis funcional',
+    treatment: 'Dieta blanda, antiácidos',
+    prescription: 'Omeprazol 20mg - 1 cp/día por 14 días',
+    follow_up_date: todayStr,
+  })
+
+  await db.insert(schema.con_treatments).values({
+    tenant_id: tenantConsultorio!.id,
+    patient_id: patient2!.id,
+    name: 'Rehabilitación Lumbar',
+    professional: 'Lic. Gómez (Kinesiología)',
+    start_date: daysAgo(20),
+    sessions_total: '12',
+    sessions_done: '5',
+    cost_total: '36000',
+    cost_paid: '15000',
+    status: 'active',
+    notes: 'Hernia L4-L5, buena evolución',
+  })
+
+  console.log(`   ✓ 1 consultorio, 3 pacientes, 5 turnos, 1 historial, 1 tratamiento`)
+  console.log(`   → ID del tenant consultorios: ${tenantConsultorio!.id}`)
+
   // ── RESUMEN ───────────────────────────────────────────────────────────────────
 
   console.log('\n✅ Seed demo completo!\n')
   console.log('📋 Datos cargados:')
-  console.log(`   • 3 tenants: Estudio García (contadores), Fitness Total (gimnasios), Transporte del Sur (logística)`)
-  console.log(`   • MRR total: $750/mes`)
+  console.log(`   • 4 tenants: Estudio García (contadores), Fitness Total (gimnasios), Transporte del Sur (logística), Dr. Méndez (consultorios)`)
+  console.log(`   • MRR total: $1050/mes`)
   console.log(`   • 5 tickets (1 crítico, 2 medios, 2 features)`)
   console.log(`   • 3 conversaciones con mensajes`)
   console.log(`   • Datos completos de los 3 verticales`)

@@ -5,30 +5,45 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div className="flex h-screen bg-background">
-      <aside className="w-64 border-r bg-card flex flex-col">
-        <div className="p-6 border-b">
-          <h1 className="font-bold text-lg">Empresa IA</h1>
+      <aside className="w-64 border-r bg-card flex flex-col overflow-y-auto">
+        <div className="p-6 border-b flex-shrink-0">
+          <h1 className="font-bold text-lg">Vorax IA</h1>
+          <p className="text-xs text-muted-foreground mt-0.5">Panel del cliente</p>
         </div>
-        <nav className="flex-1 p-4 space-y-1">
+        <nav className="flex-1 p-4 space-y-0.5">
           <NavItem href="/dashboard" label="Inicio" />
           <NavItem href="/dashboard/chat" label="Asistente IA" />
           <NavItem href="/dashboard/conversations" label="Conversaciones" />
           <NavItem href="/dashboard/tickets" label="Tickets" />
-          <p className="px-3 pt-4 pb-1 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">Gimnasio</p>
+
+          <SectionLabel label="Gimnasio" />
           <NavItem href="/dashboard/socios" label="Socios" />
           <NavItem href="/dashboard/clases" label="Clases" />
-          <p className="px-3 pt-4 pb-1 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">Logística</p>
+
+          <SectionLabel label="Consultorio" />
+          <NavItem href="/dashboard/pacientes" label="Pacientes" />
+          <NavItem href="/dashboard/turnos" label="Agenda de Turnos" />
+
+          <SectionLabel label="Logística" />
           <NavItem href="/dashboard/envios" label="Envíos" />
           <NavItem href="/dashboard/flota" label="Flota y Choferes" />
-          <p className="px-3 pt-4 pb-1 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">Sistema</p>
+
+          <SectionLabel label="Sistema" />
           <NavItem href="/dashboard/billing" label="Facturación" />
-          <NavItem href="/dashboard/settings" label="Configuración" />
         </nav>
       </aside>
       <main className="flex-1 overflow-auto">
         <div className="p-8">{children}</div>
       </main>
     </div>
+  )
+}
+
+function SectionLabel({ label }: { label: string }) {
+  return (
+    <p className="px-3 pt-4 pb-1 text-xs font-semibold text-muted-foreground/60 uppercase tracking-wider">
+      {label}
+    </p>
   )
 }
 

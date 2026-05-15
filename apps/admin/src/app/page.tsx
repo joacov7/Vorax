@@ -70,10 +70,10 @@ const STATUS_COLORS: Record<string, string> = {
 }
 
 const VERTICAL_EMOJI: Record<string, string> = {
-  contadores: '📊',
-  gimnasios:  '🏋️',
+  contadores:   '📊',
+  gimnasios:    '🏋️',
   consultorios: '🏥',
-  logistica:  '🚛',
+  logistica:    '🚛',
 }
 
 const PRIORITY_DOT: Record<string, string> = {
@@ -109,7 +109,7 @@ export default async function AdminDashboard() {
             <MetricCard label="Suscripciones" value={`${metrics.activeSubs}`} sub="Activas con pago" color="green" />
             <MetricCard label="Tickets abiertos" value={`${metrics.openTickets}`} sub="Sin resolver" color={metrics.openTickets > 10 ? 'red' : 'neutral'} />
             <MetricCard label="Conversaciones (30d)" value={`${metrics.newConversations}`} sub="Web + WhatsApp" color="neutral" />
-            <MetricCard label="Verticales" value="2" sub="Contadores · Gimnasios" color="neutral" />
+            <MetricCard label="Verticales" value="4" sub="Contadores · Gimnasios · Consultorios · Logística" color="neutral" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

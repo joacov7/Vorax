@@ -1,0 +1,17 @@
+{
+  "name": "@empresa-ia/vertical-consultorios",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@empresa-ia/db": "workspace:*",
+    "@empresa-ia/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
